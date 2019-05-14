@@ -1,0 +1,54 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+  redis:
+    open: true
+    database: 5
+    host: 10.246.84.99 # 使用你的redis替换
+    port: 6379
+
+info:
+  version: 1.0.0
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /gateway/health
+  client:
+    service-url:
+      defaultZone: http://118.24.115.85:8761/eureka/ # 使用你的eureka 替换
+    registry-fetch-interval-seconds: 2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+ribbon:
+  ServerListRefreshInterval: 1000
+  OkToRetryOnAllOperations: true
+  MaxAutoRetriesNextServer: 3
+  MaxAutoRetries: 1
+  ReadTimeout: 5000
+  ConnectTimeout: 3000
+  retryableStatusCodes: 404,500,503
