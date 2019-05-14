@@ -11,6 +11,21 @@
 - key : blacklist_ip:{ip}  
 - ttl : one day
 
+#### IP黑名单RESTFul 接口
+| 接口名称      | 定义       | 协议  |
+| ------------- |:-------------:| -----:|
+| 获取所有IP黑名单      |  /gateway/blacklist/ip| GET
+| 新增IP黑名单 | /gateway/blacklist/ip   |    POST |
+| 删除IP黑名单 | /gateway/blacklist/ip/{ip}  |    DELETE |
+
+#### 请求示例
+```
+{
+            "ip": "127.0.0.1", # ip
+}
+```
+
+
 ### 2.接口白名单检查
 支持如下格式
  * /nc/*
@@ -24,12 +39,56 @@
 - whitelist_api_pattern
 - whitelist_service
 
+#### 接口白名单RESTFul 接口
+| 接口名称      | 定义       | 协议  |
+| ------------- |:-------------:| -----:|
+| 获取所有白名单      |  /gateway/whitelist/api | GET
+| 新增白名单 | /gateway/whitelist/api   |    POST |
+| 删除白名单 | /gateway/whitelist/api  |    DELETE |
+
+#### 请求示例
+```
+{
+            "api": "/nc/sms/delivery", # api
+}
+```
+
+
 ### 3.权限认证
 当创建API时开启了安全认证,该组件会被执行! 组件会将流程交给权限认证插件,权限认证插件负责做相关处理后决定将流程交给下一个组件处理或结束请求
 默认全局开启 jwt 认证 ，接口白名单除外
 
 ### 4.动态路由
 支持http/lb 协议路由。
+
+#### 动态路由接口
+| 接口名称      | 定义       | 协议  |
+| ------------- |:-------------:| -----:|
+| 获取所有路由      |  /gateway/routes | GET
+| 根据路由ID查询路由详情      |   /gateway/routes/{id} | GET| 
+| 新增路由 | /gateway/routes   |    POST |
+| 修改路由信息 |/gateway/routes/{id}   |    PUT |
+| 删除路由 | /gateway/routes/{id}  |    DELETE |
+
+#### 请求示例
+```
+{
+            "id": "nc", # 服务id
+            "predicates": [
+                {
+                    "name": "Path",
+                    "args": {
+                        "pattern": "/nc/**"  # 匹配规则
+                    }
+                }
+            ],
+            "filters": [], # 过滤器
+            "uri": "http://127.0.0.1:8081",   # 转发地址 , 如果服务注册到网关，可以使用 lb://nc  ，自动实现负载均衡
+            "order": 0 # 排序
+}
+```
+			
+
 
 
 
