@@ -2,8 +2,9 @@
 基于SpringCloudGateway 实现的网关，包含IP黑名单，接口白名单，JWT权限认证等功能，拓展简单，易于上手。
 
 
+
 ## 组件介绍
-![](http://10.246.84.77:4999/server/../Public/Uploads/2019-05-14/5cda827049ebb.png)
+![](https://github.com/Imaginary11/api-gateway/blob/master/apigateway.png)
 
 ### 1.IP黑名单检查
 该组件永远会被执行! 用户请求时第一步先经过黑名单检查,会获取用户的IP地址,如果用户的IP地址在全局黑名单中,结束请求并响应状态码:403;反则继续执行处理...
