@@ -1,5 +1,5 @@
 ## api-gateway
-基于SpringCloudGateway 实现的网关，包含IP黑名单，接口白名单，JWT权限认证等功能，拓展简单，易于上手。
+基于SpringCloudGateway 实现的网关，包含动态路由、IP黑名单、接口白名单、JWT权限认证等功能，拓展简单，易于上手。
 
 ![](https://github.com/Imaginary11/api-gateway/blob/master/apigateway.png)
 
@@ -101,6 +101,7 @@
 ## todo
 -  参数检查
 -  访问限制
+- 协议转换
 -  前置处理器
 -  中心处理器(主处理器)
 -  后置处理器
